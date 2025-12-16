@@ -1,7 +1,7 @@
 # PC Monitor (USB Version)
 Flipper Application for monitoring PC resources via USB (Virtual COM Port).
 
-**A backend running on your PC is required.**
+**[A backend running on your PC is required.](https://github.com/DonJulve/Flipper-Zero-PC-Monitor-USB-Backend)**
 
 This is a ported version of the original [PC Monitor](https://github.com/TheSainEyereg/flipper-pc-monitor) application to work over USB instead of Bluetooth.
 
