@@ -12,6 +12,6 @@ This is a ported version of the original [PC Monitor](https://github.com/TheSain
 4. Run the accompanying Rust backend on your PC.
 
 ## Credits & Acknowledgments
-- **Original Author**: [Olejka](https://github.com/Olejka) / [TheSainEyereg](https://github.com/TheSainEyereg)
+- **Original Author**: [TheSainEyereg](https://github.com/TheSainEyereg)
 - **BLE Implementation**: [Willy-JL](https://github.com/Willy-JL)
 - **USB Port & Backend Transformation**: [DonJulve](https://github.com/DonJulve)
