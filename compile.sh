@@ -3,7 +3,7 @@ set -e
 
 APP_DIR=$(pwd)
 # Default relative path from the project structure observed
-DEFAULT_FIRMWARE_DIR="../flipperzero-firmware-wPlugins"
+DEFAULT_FIRMWARE_DIR="../flipperzero-firmware"
 
 # Ask for firmware directory
 read -p "Enter firmware directory path [default: $DEFAULT_FIRMWARE_DIR]: " FIRMWARE_DIR
