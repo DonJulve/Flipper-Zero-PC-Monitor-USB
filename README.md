@@ -3,6 +3,8 @@ Flipper Application for monitoring PC resources via USB (Virtual COM Port).
 
 **[A backend running on your PC is required.](https://github.com/DonJulve/Flipper-Zero-PC-Monitor-USB-Backend)**
 
+**This branch is intended to be used with the RogueMaster firmware.**
+
 This is a ported version of the original [PC Monitor](https://github.com/TheSainEyereg/flipper-pc-monitor) application to work over USB instead of Bluetooth.
 
 ## How to use
