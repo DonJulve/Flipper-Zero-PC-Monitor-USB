@@ -39,7 +39,10 @@ static PcMonitorApp* pc_monitor_alloc() {
     app->event_queue = furi_message_queue_alloc(8, sizeof(InputEvent));
     app->notification = furi_record_open(RECORD_NOTIFICATION);
     app->gui = furi_record_open(RECORD_GUI);
-    
+
+    // Keep handle to cli_vcp to restore it cleanly on exit
+    app->cli_vcp = furi_record_open(RECORD_CLI_VCP);
+
     // USB callback setup
     // We use the default CDC channel 0
     static CdcCallbacks usb_cdc_callbacks = {
@@ -61,11 +64,16 @@ static PcMonitorApp* pc_monitor_alloc() {
 }
 
 static void pc_monitor_free(PcMonitorApp* app) {
-    // Restore default CDC callbacks (usually CLI)
-    // There isn't a "restore default" function easily accessible, but passing NULL might disable ours.
-    // However, the best practice is to reset to NULL or let the system handle it if we didn't save the old one.
-    // But since we can't easily get the old one, we just clear ours.
+    // Clear our CDC callbacks
     furi_hal_cdc_set_callbacks(0, NULL, NULL);
+
+    // Cycle CLI VCP disable -> enable to force it to re-register its own callbacks
+    // so qFlipper and system CLI resume immediately without reboot
+    if(app->cli_vcp) {
+        cli_vcp_disable(app->cli_vcp);
+        cli_vcp_enable(app->cli_vcp);
+        furi_record_close(RECORD_CLI_VCP);
+    }
 
     gui_remove_view_port(app->gui, app->view_port);
     view_port_free(app->view_port);
