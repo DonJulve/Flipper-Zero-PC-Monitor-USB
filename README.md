@@ -38,5 +38,4 @@ pc-folder/
 
 ## Credits & Acknowledgments
 - **Original Author**: [TheSainEyereg](https://github.com/TheSainEyereg)
-- **BLE Implementation**: [Willy-JL](https://github.com/Willy-JL)
 - **USB Port, Soundboard & Enhancements**: [DonJulve](https://github.com/DonJulve)
