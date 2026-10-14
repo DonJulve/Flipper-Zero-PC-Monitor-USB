@@ -1,4 +1,5 @@
 #include "pc_monitor.h"
+#include <string.h>
 
 static void render_callback(Canvas* canvas, void* ctx) {
     furi_assert(ctx);
@@ -96,7 +97,36 @@ int32_t pc_monitor_app(void* p) {
     InputEvent event;
     while(true) {
         if(furi_message_queue_get(app->event_queue, &event, 100) == FuriStatusOk) { // 100ms timeout for checking connection state
-            if(event.type == InputTypeShort && event.key == InputKeyBack) break;
+            if(event.type == InputTypeLong && event.key == InputKeyBack) break;
+
+            if(event.type == InputTypeShort) {
+                const char* cmd = NULL;
+                switch(event.key) {
+                case InputKeyUp:
+                    cmd = "Press Up\r\n";
+                    break;
+                case InputKeyDown:
+                    cmd = "Press Down\r\n";
+                    break;
+                case InputKeyRight:
+                    cmd = "Press Right\r\n";
+                    break;
+                case InputKeyLeft:
+                    cmd = "Press Left\r\n";
+                    break;
+                case InputKeyOk:
+                    cmd = "Press Ok\r\n";
+                    break;
+                case InputKeyBack:
+                    cmd = "Press Back\r\n";
+                    break;
+                default:
+                    break;
+                }
+                if(cmd) {
+                    furi_hal_cdc_send(0, (uint8_t*)cmd, strlen(cmd));
+                }
+            }
         }
 
         if(app->new_data_received) {
